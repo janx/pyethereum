@@ -101,7 +101,7 @@ def validate_and_get_address(addr_int, msg):
     return False
 
 end_breakpoints = [
-    'JUMP', 'JUMPI', 'CALL', 'CALLCODE', 'CALLSTATIC', 'CREATE', 'SUICIDE', 'STOP', 'RETURN', 'SUICIDE', 'INVALID', 'GAS', 'PC', 'BREAKPOINT'
+    'JUMP', 'JUMPI', 'CALL', 'CALLCODE', 'CALLSTATIC', 'CREATE', 'SUICIDE', 'STOP', 'RETURN', 'INVALID', 'GAS', 'PC', 'BREAKPOINT'
 ]
 
 start_breakpoints = [
