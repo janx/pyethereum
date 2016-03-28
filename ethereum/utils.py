@@ -155,7 +155,7 @@ def int_to_addr(x):
 
 def coerce_addr_to_bin(x):
     if is_numeric(x):
-        return encode_hex(zpad(big_endian_int.serialize(x), ADDR_BYTES))
+        return zpad(big_endian_int.serialize(x), ADDR_BYTES)
     elif len(x) == ADDR_BYTES * 2 or len(x) == 0:
         return decode_hex(x)
     else:
