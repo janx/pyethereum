@@ -490,7 +490,7 @@ def vm_execute(ext, msg, code, breaking=False):
             elif op == op_SSTORE or op == op_SSTOREEXT:
                 if op == op_SSTOREEXT:
                     shard = stk.pop()
-                    if not validate_and_get_address(256**ADDR_BYTES * shard):
+                    if not validate_and_get_address(256**ADDR_BASE_BYTES * shard):
                         return vm_exception('OUT OF RANGE')
                     toaddr = shardify(msg.to, shard)
                 else:   
@@ -534,7 +534,7 @@ def vm_execute(ext, msg, code, breaking=False):
                 stk.append(compustate.gas)  # AFTER subtracting cost 1
             elif op == op_SLOADEXT:
                 shard, key = stk.pop(), stk.pop()
-                if not validate_and_get_address(256**ADDR_BYTES * shard):
+                if not validate_and_get_address(256**ADDR_BASE_BYTES * shard):
                     return vm_exception('OUT OF RANGE')
                 toaddr = shardify(msg.to, shard)
                 stk.append(utils.big_endian_to_int(ext.get_storage(toaddr, key)))
@@ -685,7 +685,7 @@ def vm_execute(ext, msg, code, breaking=False):
         elif op == op_SLOADBYTES or op == op_SLOADEXTBYTES:
             if op == op_SLOADEXTBYTES:
                 shard = stk.pop()
-                if not validate_and_get_address(256**ADDR_BYTES * shard):
+                if not validate_and_get_address(256**ADDR_BASE_BYTES * shard):
                     return vm_exception('OUT OF RANGE')
                 toaddr = shardify(msg.to, shard)
             else:
@@ -709,7 +709,7 @@ def vm_execute(ext, msg, code, breaking=False):
             stk.append(utils.big_endian_to_int(ext.get_storage(RNGSEEDS, stk.pop())))
         elif op == op_SSIZEEXT:
             shard, key = stk.pop(), stk.pop()
-            if not validate_and_get_address(256**ADDR_BYTES * shard):
+            if not validate_and_get_address(256**ADDR_BASE_BYTES * shard):
                 return vm_exception('OUT OF RANGE')
             toaddr = shardify(msg.to, shard)
             stk.append(len(ext.get_storage(toaddr, key)))
@@ -718,7 +718,7 @@ def vm_execute(ext, msg, code, breaking=False):
         elif op == op_SSTOREBYTES or op == op_SSTOREEXTBYTES:
             if op == op_SSTOREEXTBYTES:
                 shard = stk.pop()
-                if not validate_and_get_address(256**ADDR_BYTES * shard):
+                if not validate_and_get_address(256**ADDR_BASE_BYTES * shard):
                     return vm_exception('OUT OF RANGE')
                 toaddr = shardify(msg.to, shard)
             else:
