@@ -98,7 +98,7 @@ class Block(rlp.Serializable):
     def add_transaction(tx, group_id=0):
         self.transaction_groups[group_id].append(tx)
         self.summaries[group_id].transaction_hash = sha3(rlp.encode(self.transaction_groups[group_id]))
-        self.header.txroot = sha3(rlp.encode(self.summaries[group_id]))
+        self.header.txroot = sha3(rlp.encode(self.summaries))
 
     @property
     def hash(self): return self.header.hash
