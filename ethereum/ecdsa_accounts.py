@@ -38,7 +38,7 @@ if ~mload(0) != self.storage[2]:
     # ~log1(0, 0, 51)
     ~invalid()
 # Check value sufficiency
-if self.balance < ~calldataload(192) + ~calldataload(0) * ~txexecgas():
+if self.balance < ~calldataload(192) + ~calldataload(96) * ~txexecgas():
     # ~log1(0, 0, 52)
     ~invalid()
 # Sequence number operations
