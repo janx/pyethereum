@@ -158,6 +158,7 @@ class Opinion():
         if bet.prevhash != self.prevhash:
             sys.stderr.write('Bet hash does not match prevhash: actual %s desired %s. Seq: %d \n' %
                              (bet.prevhash.encode('hex'), self.prevhash.encode('hex'), bet.seq))
+            return False
         if self.withdrawn:
             raise Exception("Bet made after withdrawal! Slashing condition triggered!")
         # Update seq and hash
