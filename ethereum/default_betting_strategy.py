@@ -46,10 +46,6 @@ def bet_on_block(opinions, blk_number, blk_hash, tr, genesis_time, now):
     # My default opinion based on (i) whether or not I have the block,
     # (ii) when I saw it first if I do, and (iii) the current time
     default_bet = mk_initial_bet(blk_number, blk_hash, tr, genesis_time, now)
-    # Go through others' opinions, check if they (i) are eligible to
-    # bet, and (ii) have bet; if they have, add their bet to the
-    # list of bets; otherwise, add the default bet in their place
-    opinion_count = 0
     for i in opinions.keys():
         if opinions[i].induction_height <= blk_number < opinions[i].withdrawal_height and not opinions[i].withdrawn:
             p = opinions[i].get_prob(blk_number)
@@ -66,7 +62,6 @@ def bet_on_block(opinions, blk_number, blk_hash, tr, genesis_time, now):
             else:
                 probs.append(p)
             weights.append(opinions[i].deposit_size)
-            opinion_count += (1 if p is not None else 0)
     # The algorithm for producing your own bet based on others' bets;
     # the intention is to converge toward 0 or 1
     p33 = weighted_percentile(probs, weights, 1/3.)
